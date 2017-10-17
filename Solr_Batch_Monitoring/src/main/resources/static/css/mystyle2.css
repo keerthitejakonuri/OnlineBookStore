@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+
+.table{
+	
+	border:1.0;
+	align:center;
+}
+
+th {
+	background-color:#e0ebeb;
+}
+	
+table.thislink {border-spacing: 10px;
+	border-collapse: separate;
+	align:center;
+}
+
+select {
+	font-weight: 600;
+	height:22px;
+}
+
+input {
+	font-weight: 600;
+	height:22px;
+}
+
+.button {
+    background-color: #00cc99;
+    border: none;
+    color: white;
+    padding: 1px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 5px;
+    margin: 1px 0.5px;
+    cursor: pointer;
+}
+
+  #fixpos{
+  position:fixed;
+  right: 100px;
+  }
+  
+  .bs-example{
+    	margin: 20px;
+    }
+    .modal-content iframe{
+        margin: 0 auto;
+        display: block;
+    }

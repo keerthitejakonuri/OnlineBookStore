@@ -1,0 +1,33 @@
+@CHARSET "ISO-8859-1";
+
+#mytable th {
+	background-color:#e0ebeb;
+}
+
+#mytable{
+	font-weight:bold;
+	margin-bottom: 10px;
+}
+
+.status{
+	float:left;
+	width:220px;
+	border:1px solid;
+	padding: 5px;
+	border-radius: 15px;
+	margin-right: 20px;
+	background-color:#98FB98;
+}
+
+.foremails{
+	padding: 2px;
+	border-radius: 10px;
+	margin-bottom:10px;
+}
+
+#email{
+	width:300px;
+}
+#submitemail{
+	margin-bottom:15px;
+}

@@ -1,0 +1,80 @@
+USE copdta;
+
+CREATE TABLE `scheduler_info` (
+  `object_type` varchar(255) NOT NULL COMMENT 'Object Type',
+  `data_center` varchar(255) NOT NULL COMMENT 'Data Center',
+  `scheduler_interval` int(5) NOT NULL COMMENT 'Interval in Minutes',
+  `last_ran_at` datetime NOT NULL COMMENT ' Last ran at',
+  PRIMARY KEY (`object_type`,`data_center`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Timings` (
+  `object_type` varchar(255) NOT NULL COMMENT 'Object Type',
+  `batch_interval` int(5) NOT NULL COMMENT 'Batch Runs every (in Minutes)',
+  `data_center` varchar(255) NOT NULL COMMENT 'Data center',
+  `Start_Time` varchar(255) NOT NULL COMMENT 'Starting Time',
+  `End_Time` varchar(255) NOT NULL COMMENT 'Ending Time',
+  PRIMARY KEY (`object_type`,`batch_interval`,`data_center`,`Start_Time`,`End_Time`),
+  KEY `fk_timings` (`object_type`,`data_center`),
+  CONSTRAINT `fk_timings` FOREIGN KEY (`object_type`, `data_center`) REFERENCES `scheduler_info` (`object_type`, `data_center`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Emails_Info` (
+  `email_id` varchar(255) NOT NULL COMMENT 'Mail_Id',
+  `type` varchar(255) NOT NULL COMMENT 'Receiver or Sender',
+  PRIMARY KEY (`email_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO scheduler_info VALUES("lot","us_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("lot","uk_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("lot","us_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("lot","uk_colo",5,CURDATE());
+INSERT INTO scheduler_info VALUES("buyer","us_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("buyer","uk_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("buyer","us_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("buyer","uk_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("seller","us_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("seller","uk_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("seller","us_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("seller","uk_colo",5,CURDATE());
+INSERT INTO scheduler_info VALUES("video","us_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("video","us_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("video","uk_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("video","uk_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("image","us_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("image","us_colo",5,CURDATE());
+INSERT INTO scheduler_info VALUES("image","uk_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("image","uk_colo",5,CURDATE());
+INSERT INTO scheduler_info VALUES("attr","us_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("attr","uk_reno",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("attr","us_colo",5,CURDATE()); 
+INSERT INTO scheduler_info VALUES("attr","uk_colo",5,CURDATE()); 
+
+INSERT INTO Timings VALUES("lot",5,"uk_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("lot",5,"us_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("lot",5,"uk_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("lot",5,"us_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("buyer",60,"uk_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("buyer",60,"us_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("buyer",60,"uk_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("buyer",60,"us_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("seller",60,"uk_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("seller",60,"us_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("seller",60,"uk_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("seller",60,"us_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("video",5,"us_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("video",5,"us_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("video",5,"uk_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("video",5,"uk_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("image",5,"us_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("image",5,"us_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("image",5,"uk_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("image",5,"uk_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("attr",15,"uk_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("attr",15,"us_reno","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("attr",15,"uk_colo","0:00:00","23:59:59" );
+INSERT INTO Timings VALUES("attr",15,"us_colo","0:00:00","23:59:59" );
+
+INSERT INTO Emails_Info VALUES("Swapna.Minnakanti@Copart.Com","r"); 
+INSERT INTO Emails_Info VALUES("keerthi.konuri@copart.com","r"); 
+INSERT INTO Emails_Info VALUES("SolrBatchSync@copart.com","s"); 

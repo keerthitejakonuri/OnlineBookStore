@@ -1,0 +1,73 @@
+@CHARSET "ISO-8859-1";
+
+#selectTime{
+	float: right;
+	margin: 30px 50px 10px 0px;
+}
+
+#refresh{
+	color: black;
+	float: right;
+	margin: 30px 10px 10px 10px;
+}
+
+#mytable th {
+	background-color:#e0ebeb;
+}
+
+#mytable div:hover {
+  background-color: #D3D3D3; important;
+}
+
+.tooltip-inner {
+    max-width: 350px;
+    color: #FFFFFF;
+    background-color: #696969;
+    border-color: ;
+}
+select {
+	font-weight: 600;
+	height:22px;
+}
+
+input {
+	font-weight: 600;
+	height:22px;
+}
+
+.tooltip{
+	background-color: ;	
+}
+
+#fortitle{
+	font-weight: 900;
+}
+
+#refreshtime{
+	color: #f4ee42;
+	float:right;
+	margin: 60px -200px 0px 0px;
+}
+
+#mytable td div{
+	border-style: solid;
+	height: 90%;
+	width: 95%;
+	border-radius: 25px;
+}
+
+#mytable td div p { 
+	margin:0px;
+}
+
+.spacer{
+	margin:1px;
+}
+
+#mytable td div p {
+    white-space: pre;
+}
+
+#mytable{
+	font-weight:bold;
+}

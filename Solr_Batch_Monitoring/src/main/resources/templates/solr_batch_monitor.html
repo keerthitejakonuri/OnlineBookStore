@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+
+		<!--
+  ____                       _
+ / ___|___  _ __   __ _ _ __| |_
+| |   / _ \| '_ \ / _` | '__| __|
+| |__| (_) | |_) | (_| | |  | |_
+ \____\___/| .__/ \__,_|_|   \__|
+           |_|
+
+https://copartcareers.silkroad.com/
+-->
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head lang = "en">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Solr Batch Monitoring</title>
+<link rel = "shortcut icon" href="../../static/images/favicon.ico" th:href="@{/images/favicon.ico}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" media="all"  href="../../static/css/mystyle3.css" th:href="@{css/mystyle3.css}" />
+<!-- jQuery library -->
+<script type="text/javascript" src="../../static/css/moment.js" th:src="@{css/moment.js}"></script>
+<script type="text/javascript" src="../../static/css/moment-timezone-allyears.js" th:src="@{css/moment-timezone-allyears.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js'></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+	
+				<div class="row" style="background-color:#1d5ab9" >	
+			  		<img src="../../static/images/copartimage.jpg" th:src="@{/images/copartimage.jpg}" th:alt="Copart" height="80"/>
+			  		
+				  		<select id="selectTime">
+							<option value="1" selected="selected">1 Min</option>
+						    <option value="2">3 Min</option>
+						    <option value="3">5 Min</option>
+						</select>
+						<h4 id = "refresh">Refresh Time</h4>
+						<h5 id='refreshtime'></h5>
+			 	</div>
+	</div>
+	<div class="container-fluid">
+		
+		
+		<div class="col-sm-12">
+			<table id="mytable" class="table"  >
+				<tr>
+		        	<th style="text-align: center;"><h5><b>Object Type</b></h5></th>
+		            <th style="text-align: center;"><h5><b>US_Reno</b></h5></th>
+		            <th style="text-align: center;"><h5><b>US_Colo</b></h5></th>
+		            <th style="text-align: center;"><h5><b>UK_Reno</b></h5></th>
+		            <th style="text-align: center;"><h5><b>UK_Colo</b></h5></th>
+               </tr>
+               <tr id ="row1">
+               		<td><h5><b>LOT</b></h5></td>
+               		<td><div id='row1div1' class="data"><p style="font-size:10px" id='row1div1h1'><b>     <span id='row1div1h1s1'></span>      <span id='row1div1h1s2'>     </span></b><span id='row1div1h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn11" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row1div1h2'><b>  Update Date : <span id='row1div1h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row1div2' class="data"><p style="font-size:10px" id='row1div2h1'><b>     <span id='row1div2h1s1'></span>      <span id='row1div2h1s2'>     </span></b><span id='row1div2h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn12" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row1div2h2'><b>  Update Date : <span id='row1div2h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row1div3' class="data"><p style="font-size:10px" id='row1div3h1'><b>     <span id='row1div3h1s1'></span>      <span id='row1div3h1s2'>     </span></b><span id='row1div3h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn13" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row1div3h2'><b>  Update Date : <span id='row1div3h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row1div4' class="data"><p style="font-size:10px" id='row1div4h1'><b>     <span id='row1div4h1s1'></span>      <span id='row1div4h1s2'>     </span></b><span id='row1div4h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn14" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row1div4h2'><b>  Update Date : <span id='row1div4h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               </tr>
+               <tr id ="row2">
+               		<td><h5><b>BUYER</b></h5></td>
+               		<td><div id='row2div1' class="data"><p style="font-size:10px" id='row2div1h1'><b>     <span id='row2div1h1s1'></span>      <span id='row2div1h1s2'>     </span></b><span id='row2div1h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn21" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row2div1h2'><b>  Update Date : <span id='row2div1h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row2div2' class="data"><p style="font-size:10px" id='row2div2h1'><b>     <span id='row2div2h1s1'></span>      <span id='row2div2h1s2'>     </span></b><span id='row2div2h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn22" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row2div2h2'><b>  Update Date : <span id='row2div2h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row2div3' class="data"><p style="font-size:10px" id='row2div3h1'><b>     <span id='row2div3h1s1'></span>      <span id='row2div3h1s2'>     </span></b><span id='row2div3h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn23" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row2div3h2'><b>  Update Date : <span id='row2div3h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row2div4' class="data"><p style="font-size:10px" id='row2div4h1'><b>     <span id='row2div4h1s1'></span>      <span id='row2div4h1s2'>     </span></b><span id='row2div4h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn24" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row2div4h2'><b>  Update Date : <span id='row2div4h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               </tr>
+               <tr id ="row3">
+               		<td><h5><b>SELLER</b></h5></td>
+               		<td><div id='row3div1' class="data"><p style="font-size:10px" id='row3div1h1'><b>     <span id='row3div1h1s1'></span>      <span id='row3div1h1s2'>     </span></b><span id='row3div1h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn31" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row3div1h2'><b>  Update Date : <span id='row3div1h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row3div2' class="data"><p style="font-size:10px" id='row3div2h1'><b>     <span id='row3div2h1s1'></span>      <span id='row3div2h1s2'>     </span></b><span id='row3div2h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn32" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row3div2h2'><b>  Update Date : <span id='row3div2h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row3div3' class="data"><p style="font-size:10px" id='row3div3h1'><b>     <span id='row3div3h1s1'></span>      <span id='row3div3h1s2'>     </span></b><span id='row3div3h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn33" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row3div3h2'><b>  Update Date : <span id='row3div3h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row3div4' class="data"><p style="font-size:10px" id='row3div4h1'><b>     <span id='row3div4h1s1'></span>      <span id='row3div4h1s2'>     </span></b><span id='row3div4h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn34" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row3div4h2'><b>  Update Date : <span id='row3div4h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               </tr>
+               <tr id ="row4">
+               		<td><h5><b>VIDEO</b></h5></td>
+               		<td><div id='row4div1' class="data"><p style="font-size:10px" id='row4div1h1'><b>     <span id='row4div1h1s1'></span>      <span id='row4div1h1s2'>     </span></b><span id='row4div1h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn41" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row4div1h2'><b>  Update Date : <span id='row4div1h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row4div2' class="data"><p style="font-size:10px" id='row4div2h1'><b>     <span id='row4div2h1s1'></span>      <span id='row4div2h1s2'>     </span></b><span id='row4div2h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn42" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row4div2h2'><b>  Update Date : <span id='row4div2h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row4div3' class="data"><p style="font-size:10px" id='row4div3h1'><b>     <span id='row4div3h1s1'></span>      <span id='row4div3h1s2'>     </span></b><span id='row4div3h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn43" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row4div3h2'><b>  Update Date : <span id='row4div3h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row4div4' class="data"><p style="font-size:10px" id='row4div4h1'><b>     <span id='row4div4h1s1'></span>      <span id='row4div4h1s2'>     </span></b><span id='row4div4h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn44" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row4div4h2'><b>  Update Date : <span id='row4div4h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               </tr>
+               <tr id ="row5">
+               		<td><h5><b>IMAGE</b></h5></td>
+               		<td><div id='row5div1' class="data"><p style="font-size:10px" id='row5div1h1'><b>     <span id='row5div1h1s1'></span>      <span id='row5div1h1s2'>     </span></b><span id='row5div1h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn51" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row5div1h2'><b>  Update Date : <span id='row5div1h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row5div2' class="data"><p style="font-size:10px" id='row5div2h1'><b>     <span id='row5div2h1s1'></span>      <span id='row5div2h1s2'>     </span></b><span id='row5div2h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn52" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row5div2h2'><b>  Update Date : <span id='row5div2h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row5div3' class="data"><p style="font-size:10px" id='row5div3h1'><b>     <span id='row5div3h1s1'></span>      <span id='row5div3h1s2'>     </span></b><span id='row5div3h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn53" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row5div3h2'><b>  Update Date : <span id='row5div3h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row5div4' class="data"><p style="font-size:10px" id='row5div4h1'><b>     <span id='row5div4h1s1'></span>      <span id='row5div4h1s2'>     </span></b><span id='row5div4h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn54" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row5div4h2'><b>  Update Date : <span id='row5div4h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               </tr>
+               <tr id ="row6">
+               		<td><h5><b>ATTR</b></h5></td>
+               		<td><div id='row6div1' class="data"><p style="font-size:10px" id='row6div1h1'><b>     <span id='row6div1h1s1'></span>      <span id='row6div1h1s2'>     </span></b><span id='row6div1h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn61" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row6div1h2'><b>  Update Date : <span id='row6div1h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row6div2' class="data"><p style="font-size:10px" id='row6div2h1'><b>     <span id='row6div2h1s1'></span>      <span id='row6div2h1s2'>     </span></b><span id='row6div2h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn62" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row6div2h2'><b>  Update Date : <span id='row6div2h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row6div3' class="data"><p style="font-size:10px" id='row6div3h1'><b>     <span id='row6div3h1s1'></span>      <span id='row6div3h1s2'>     </span></b><span id='row6div3h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn63" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row6div3h2'><b>  Update Date : <span id='row6div3h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               		<td><div id='row6div4' class="data"><p style="font-size:10px" id='row6div4h1'><b>     <span id='row6div4h1s1'></span>      <span id='row6div4h1s2'>     </span></b><span id='row6div4h1s4'><img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>    </span><a href='#myModal' data-toggle='modal'><button id="btn64" style="height:20px;width:20px;float:right;margin-right: 15px;" type="button" class="btn-xs btn-link"><span class="glyphicon glyphicon-search"></span> </button></a></p><p style="font-size:10px;text-align: center;" id='row6div4h2'><b>  Update Date : <span id='row6div4h1s3'>Nov 9 2016 12:45:6 pm     </span></b></p></div></td>
+               </tr>
+			</table>
+		</div>
+		<div style="text-align:center;height:1em;"></div>
+	</div>
+	<div style="text-align:center;"><div style="text-align:center;height:2em;" id ="fortitle"></div><span id='chart_div' class="inner" ></span></div>
+	<div style="text-align: center;" id="forrange">
+			  <b>From:</b>
+			  <input type="date" id="datepicker1" />
+			  <b>To:</b>
+			   <input type="date" id="datepicker2" />
+				<select id="thisObject">
+				  <option value="1" selected="selected">LOT</option>
+				  <option value="2">BUYER</option>
+				  <option value="3">SELLER</option>
+				  <option value="4">VIDEO</option>
+				  <option value="5">IMAGE</option>
+				  <option value="6">ATTR</option>
+				</select>
+				<select id="thisProfile">
+				  <option value="1" selected="selected">US_Reno</option>
+				  <option value="2">US_Colo</option>
+				  <option value="3">UK_Reno</option>
+				  <option value="4">UK_Colo</option>
+				</select>
+			  <button type="button" id="myBtn" class="btn btn-primary btn-xs" >Enter</button> 
+	</div>
+			<script type="text/javascript">
+				/*<![CDATA[*/
+				           
+				           jQuery(document).ready(function($){
+				        	   var profileFromYML = "Prod";
+				        	   var ukRenoMariadb_conf_flag = true;
+				        	   var usRenoMariadb_conf_flag = true;
+				        	   var usDb2_conf_flag = true;
+				        	   var usColoMariadb_conf_flag = true;
+				        	   var ukColoMariadb_conf_flag = true;
+				        	   tableData();
+				        	   var size = screen.availWidth*0.99;
+				        	   var time = 1;
+				               var time1 = 60000;
+				               var timer;
+				        	   var paginationUrl = "/pagination?pass=1&profile=1"; 
+				        	   var attr_ukcolo = 60, attr_ukreno = 60, attr_uscolo = 60, attr_usreno = 60;
+				        	   var buyer_ukcolo = 60, buyer_ukreno = 60, buyer_uscolo = 60, buyer_usreno = 60;
+				        	   var seller_ukcolo = 60, seller_ukreno = 60, seller_uscolo = 60, seller_usreno = 60;
+				        	   var video_ukcolo = 60, video_ukreno = 60, video_uscolo = 60, video_usreno = 60;
+				        	   var image_ukcolo = 60, image_ukreno = 60, image_uscolo = 60, image_usreno = 60;
+				        	   var lot_ukcolo = 5, lot_ukreno = 5, lot_uscolo = 5, lot_usreno = 5;
+				        	   var today = new Date();
+				               var dd = today.getDate();
+				               var mm = today.getMonth()+1;
+				               var yyyy = today.getFullYear();
+				               if(dd<10){dd='0'+dd;} if(mm<10){mm='0'+mm;} today = yyyy+'-'+mm+'-'+dd;
+				            	 $("#datepicker1").attr('value', today);
+				            	 $("#datepicker2").attr('value', today);
+				        	   var graphTodayUrl = "/graphToday?pass=1&profile=1";
+				            	 drawGraph(graphTodayUrl);
+				        	   
+				        	   initializeTooltip();
+				        	   forGraphTitle(1, 1);
+				        		   $("#selectTime").on("change", function () {
+				              		 time = $(this).val();
+				              		 if(time == 1){
+				              			 time1 = 60000;
+				              			 clearInterval(timer);
+				              			 timer = setInterval ( tableData, time1 );
+				              		 }
+				              		 else if (time == 2){
+				              			 time1 = 180000;
+				              			 clearInterval(timer);
+				              			 timer = setInterval ( tableData, time1 );
+				              		 }
+				              		 else{
+				              			 time1 = 300000;
+				              			 clearInterval(timer);
+				              			 timer = setInterval ( tableData, time1 );
+				              		 }
+				              		 tableData();
+				              	 });
+				        		 
+				        		   
+				        		 $("#btn11").click(function(){
+				        			 paginationUrl = "/pagination?pass=1&profile=1";
+				        			 
+				        			 forModalTitle(1, 1);
+				        		 });
+				        		 $("#btn12").click(function(){
+				        			 paginationUrl = "/pagination?pass=1&profile=2";
+				        			 
+				        			 forModalTitle(1, 2);
+				        		 }); 
+				        		 $("#btn13").click(function(){
+				        			 paginationUrl = "/pagination?pass=1&profile=3";
+				        			 
+				        			 forModalTitle(1, 3);
+				        		 });  
+				        		 $("#btn14").click(function(){
+				        			 paginationUrl = "/pagination?pass=1&profile=4";
+				        			 
+				        			 forModalTitle(1, 4);
+				        		 }); 
+				        		 $("#btn21").click(function(){
+				        			 paginationUrl = "/pagination?pass=2&profile=1";
+				        			 
+				        			 forModalTitle(2, 1);
+				        		 });
+				        		 $("#btn22").click(function(){
+				        			 paginationUrl = "/pagination?pass=2&profile=2";
+				        			 
+				        			 forModalTitle(2, 2);
+				        		 }); 
+				        		 $("#btn23").click(function(){
+				        			 paginationUrl = "/pagination?pass=2&profile=3";
+				        			 
+				        			 forModalTitle(2, 3);
+				        		 });  
+				        		 $("#btn24").click(function(){
+				        			 paginationUrl = "/pagination?pass=2&profile=4";
+				        			
+				        			 forModalTitle(2, 4);
+				        		 }); 
+				        		 $("#btn31").click(function(){
+				        			 paginationUrl = "/pagination?pass=3&profile=1";
+				        			
+				        			 forModalTitle(3, 1);
+				        		 });
+				        		 $("#btn32").click(function(){
+				        			 paginationUrl = "/pagination?pass=3&profile=2";
+				        			
+				        			 forModalTitle(3, 2);
+				        		 }); 
+				        		 $("#btn33").click(function(){
+				        			 paginationUrl = "/pagination?pass=3&profile=3";
+				        			 
+				        			 forModalTitle(3, 3);
+				        		 });  
+				        		 $("#btn34").click(function(){
+				        			 paginationUrl = "/pagination?pass=3&profile=4";
+				        			 
+				        			 forModalTitle(3, 4);
+				        		 }); 
+				        		 $("#btn41").click(function(){
+				        			 paginationUrl = "/pagination?pass=4&profile=1";
+				        			 
+				        			 forModalTitle(4, 1);
+				        		 });
+				        		 $("#btn42").click(function(){
+				        			 paginationUrl = "/pagination?pass=4&profile=2";
+				        			
+				        			 forModalTitle(4, 2);
+				        		 }); 
+				        		 $("#btn43").click(function(){
+				        			 paginationUrl = "/pagination?pass=4&profile=3";
+				        			 
+				        			 forModalTitle(4, 3);
+				        		 });  
+				        		 $("#btn44").click(function(){
+				        			 paginationUrl = "/pagination?pass=4&profile=4";
+				        			 
+				        			 forModalTitle(4, 4);
+				        		 }); 
+				        		 $("#btn51").click(function(){
+				        			 paginationUrl = "/pagination?pass=5&profile=1";
+				        			 
+				        			 forModalTitle(5, 1);
+				        		 });
+				        		 $("#btn52").click(function(){
+				        			 paginationUrl = "/pagination?pass=5&profile=2";
+				        			 
+				        			 forModalTitle(5, 2);
+				        		 }); 
+				        		 $("#btn53").click(function(){
+				        			 paginationUrl = "/pagination?pass=5&profile=3";
+				        			
+				        			 forModalTitle(5, 3);
+				        		 });  
+				        		 $("#btn54").click(function(){
+				        			 paginationUrl = "/pagination?pass=5&profile=4";
+				        			 
+				        			 forModalTitle(5, 4);
+				        		 }); 
+				        		 $("#btn61").click(function(){
+				        			 paginationUrl = "/pagination?pass=6&profile=1";
+				        			
+				        			 forModalTitle(6, 1);
+				        		 });
+				        		 $("#btn62").click(function(){
+				        			 paginationUrl = "/pagination?pass=6&profile=2";
+				        			
+				        			 forModalTitle(6, 2);
+				        		 }); 
+				        		 $("#btn63").click(function(){
+				        			 paginationUrl = "/pagination?pass=6&profile=3";
+				        			 
+				        			 forModalTitle(6, 3);
+				        		 });  
+				        		 $("#btn64").click(function(){
+				        			 paginationUrl = "/pagination?pass=6&profile=4";
+				        			 
+				        			 forModalTitle(6, 4);
+				        		 }); 
+				        		 
+				        		 
+				        		 function forModalTitle(pass, profile){
+				        			 var str1 = "LOT";
+				        			 var str2 = "US_Reno";
+				        			 if( pass == 1){
+				        				 str1 = "LOT";
+				        			 }
+				        			 else if (pass == 2){
+				        				 str1 = "BUYER";
+				        			 }
+				        			 else if(pass == 3){
+				        				 str1 = "SELLER";
+				        			 }
+				        			 else if(pass == 4){
+				        				 str1 = "VIDEO";
+				        			 }
+				        			 else if(pass == 5){
+				        				 str1 = "IMAGE";
+				        			 }
+				        			 else if(pass == 6){
+				        				 str1 = "Attr";
+				        			 }
+				        			 
+				        			 
+				        			 
+				        			 if(profile == 1){
+				        				 str2 = "US_Reno";
+				        			 }
+				        			 else if(profile == 2){
+				        				 str2 = "US_Colo";
+				        			 }
+				        			 else if(profile == 3){
+				        				 str2 = "UK_Reno";
+				        			 }
+				        			 else if(profile == 4){
+				        				 str2 = "UK_Colo";
+				        			 }
+				        			 
+				        			 $(".modal-title").html(str1 + " in "+ str2);
+				        		 }
+				        		 
+				        		 
+				        		 
+				        	
+				        		 
+				        		 
+				        		 function initializeTooltip(){
+				        			
+						        		 $('#row1div1').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row2div1').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row3div1').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row4div1').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row5div1').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row6div1').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+				        			 
+				        			 
+				        			 
+						        		 $('#row1div2').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row2div2').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row3div2').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row4div2').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row5div2').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row6div2').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+				        			 
+				        			 
+				        			
+						        		 $('#row1div3').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row2div3').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row3div3').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row4div3').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row5div3').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row6div3').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+				        			 
+				        			 
+				        			 
+						        		 $('#row1div4').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row2div4').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row3div4').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row4div4').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row5div4').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+						        		 $('#row6div4').tooltip({title: "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot</b> Batch ID:<b>  7223 </b></h6> <h6>Starting Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Ending Date:<b>  ov 14 2016  12:15:48 pm </b></h6> <h6>Count:<b> 1 </b></h6></div>", placement:"bottom",container:"body", trigger: "hover", html: true});
+				        			 
+				        			} 	// end of initailizeToolTip fn
+				        		 
+				        		 function tableData(){
+				        			today = new Date();
+					            	dd = today.getDate();
+					            	mm = today.getMonth()+1;
+					            	yyyy = today.getFullYear();
+					            	 if(dd<10){dd='0'+dd;} if(mm<10){mm='0'+mm;} today = yyyy+'-'+mm+'-'+dd;
+					            	 $("#datepicker1").attr('value', today);
+					            	 $("#datepicker2").attr('value', today);
+				        		   var refreshtime = document.getElementById("refreshtime");
+				        		   var timezone = jstz.determine();
+				        		   refreshtime.innerHTML = "Last Refreshed at: "+formatDate(new Date())+" ("+timezone.name()+") ";
+				        		   //drawGraph(graphTodayUrl);			Remove the comments inorder to refresh the graph
+				        		   $.get("/getconditions", function(data1) {
+				            			 $.each(data1, function(i, list) {
+				                         	$.each(list,function(j,data){
+				                         		if(data.object_type == "attr" && data.data_center == "us_colo"){
+				                         			attr_uscolo = data.batch_interval;
+				                         		}
+				                         		else if(data.object_type == "attr" && data.data_center == "us_reno"){
+				                         			attr_usreno = data.batch_interval;
+				                         		}else if(data.object_type == "attr" && data.data_center == "uk_reno"){
+				                         			attr_ukreno = data.batch_interval;
+				                         		}else if(data.object_type == "attr" && data.data_center == "uk_colo"){
+				                         			attr_ukcolo = data.batch_interval;
+				                         		}else if(data.object_type == "image" && data.data_center == "us_colo"){
+				                         			image_uscolo = data.batch_interval;
+				                         		}else if(data.object_type == "image" && data.data_center == "us_reno"){
+				                         			image_usreno = data.batch_interval;
+				                         		}else if(data.object_type == "image" && data.data_center == "uk_reno"){
+				                         			image_ukreno = data.batch_interval;
+				                         		}else if(data.object_type == "image" && data.data_center == "uk_colo"){
+				                         			image_ukcolo = data.batch_interval;
+				                         		}else if(data.object_type == "video" && data.data_center == "us_colo"){
+				                         			video_uscolo = data.batch_interval;
+				                         		}
+				                         		else if(data.object_type == "video" && data.data_center == "us_reno"){
+				                         			video_usreno = data.batch_interval;
+				                         		}else if(data.object_type == "video" && data.data_center == "uk_reno"){
+				                         			video_ukreno = data.batch_interval;
+				                         		}else if(data.object_type == "video" && data.data_center == "uk_colo"){
+				                         			video_ukcolo = data.batch_interval;
+				                         		}else if(data.object_type == "buyer" && data.data_center == "us_colo"){
+				                         			buyer_uscolo = data.batch_interval;
+				                         		}
+				                         		else if(data.object_type == "buyer" && data.data_center == "us_reno"){
+				                         			buyer_usreno = data.batch_interval;
+				                         		}else if(data.object_type == "buyer" && data.data_center == "uk_reno"){
+				                         			buyer_ukreno = data.batch_interval;
+				                         		}else if(data.object_type == "buyer" && data.data_center == "uk_colo"){
+				                         			buyer_ukcolo = data.batch_interval;
+				                         		}else if(data.object_type == "seller" && data.data_center == "us_colo"){
+				                         			seller_uscolo = data.batch_interval;
+				                         		}
+				                         		else if(data.object_type == "seller" && data.data_center == "us_reno"){
+				                         			seller_usreno = data.batch_interval;
+				                         		}else if(data.object_type == "seller" && data.data_center == "uk_reno"){
+				                         			seller_ukreno = data.batch_interval;
+				                         		}else if(data.object_type == "seller" && data.data_center == "uk_colo"){
+				                         			seller_ukcolo = data.batch_interval;
+				                         		}else if(data.object_type == "lot" && data.data_center == "us_colo"){
+				                         			lot_uscolo = data.batch_interval;
+				                         		}
+				                         		else if(data.object_type == "lot" && data.data_center == "us_reno"){
+				                         			lot_usreno = data.batch_interval;
+				                         		}else if(data.object_type == "lot" && data.data_center == "uk_reno"){
+				                         			lot_ukreno = data.batch_interval;
+				                         		}else if(data.object_type == "lot" && data.data_center == "uk_colo"){
+				                         			lot_ukcolo = data.batch_interval;
+				                         		}
+				                         		
+				                         	});	// end of second loop
+				            			 });	// end of first loop
+				            		 });	// end of get conditions
+//============================================================ For US_Reno=============================================================================================================================================================================================================================================================================				        		   
+					        		   $.get("/index?profile=1", function(data) {
+					            			 $.each(data, function(i, list) {
+					                         	$.each(list,function(j,detail){
+					                         		//alert(detail.object_type);
+					                         		fillDivs(detail, 1);
+					               
+					                         		
+					                         	});	// end of second loop for profile 1
+					            			 });	// end of first loop for profile 1
+					            		 });	// end of get index call for profile 1
+
+//============================================================ For US_Reno=============================================================================================================================================================================================================================================================================
+	
+	
+//============================================================ For US_Colo=============================================================================================================================================================================================================================================================================				        		   
+					        		   $.get("/index?profile=2", function(data) {
+					            			 $.each(data, function(i, list) {
+					                         	$.each(list,function(j,detail){
+					                         		
+					                         		//alert(detail.object_type);
+					                         		fillDivs(detail, 2);
+					                         		
+					                         		
+					                         	});	// end of second loop for profile 2
+					            			 });	// end of first loop for profile 2
+					            		 });	// end of get index call for profile 2
+
+//============================================================ For US_Colo=============================================================================================================================================================================================================================================================================
+
+
+//============================================================ For UK_Reno=============================================================================================================================================================================================================================================================================				        		   
+					        		   $.get("/index?profile=3", function(data) {
+					            			 $.each(data, function(i, list) {
+					                         	$.each(list,function(j,detail){
+					                         		//alert(detail.object_type);
+					                         		fillDivs(detail, 3);
+					                         		
+					                         		
+					                         	});	// end of second loop for profile 3
+					            			 });	// end of first loop for profile 3
+					            		 });	// end of get index call for profile 3
+
+//============================================================ For UK_Reno=============================================================================================================================================================================================================================================================================
+
+	
+//============================================================ For UK_Colo=============================================================================================================================================================================================================================================================================				        		   
+					        		   $.get("/index?profile=4", function(data) {
+					            			 $.each(data, function(i, list) {
+					                         	$.each(list,function(j,detail){
+					                         		//alert(detail.object_type);
+					                         		fillDivs(detail, 4);
+					                         		
+					                         		
+					                         	});	// end of second loop for profile 4
+					            			 });	// end of first loop for profile 4
+					            		 });	// end of get index call for profile 4
+
+//============================================================ For UK_Colo=============================================================================================================================================================================================================================================================================
+	
+					            		 
+				        	   
+	 }	// end of tableData fn
+	 
+	 
+	 
+	 function fillDivs(detail, profile){
+		 	var div = "div1";
+		 if(profile == 1){
+			 div = "div1";
+		 }
+		 else if(profile == 2){
+			 div = "div2";
+		 }
+		 else if(profile == 3){
+			 div = "div3";
+		 }
+		 else if(profile == 4){
+			 div = "div4";
+		 }
+		 	if(detail.profileFromYML != null){
+		 		profileFromYML = detail.profileFromYML;
+		 	}
+		 	
+		 	if(detail.ukRenoMariadb_conf_flag != null){
+				ukRenoMariadb_conf_flag = detail.ukRenoMariadb_conf_flag;
+		 	}
+		 	
+			if(detail.usRenoMariadb_conf_flag != null){
+				usRenoMariadb_conf_flag = detail.usRenoMariadb_conf_flag;
+			}
+			
+			if(detail.usDb2_conf_flag != null){
+				usDb2_conf_flag = detail.usDb2_conf_flag;
+			}
+			
+			if(detail.usColoMariadb_conf_flag != null){
+			usColoMariadb_conf_flag = detail.usColoMariadb_conf_flag;
+			}
+			
+			if(detail.ukColoMariadb_conf_flag != null){
+			ukColoMariadb_conf_flag = detail.ukColoMariadb_conf_flag;
+			}
+			//console.log(ukColoMariadb_conf_flag);	
+		 
+		 if(detail.object_count != null){
+			 if(detail.object_count =='-1'){
+				 
+			 }else{
+      			detail.object_count = detail.object_count.replace(/\D/g,'');
+			 }
+      		}
+      		//$('#row1div1').tooltip({title: "Object Type:  Lot  Batch ID:  "+detail.batch_id+"  Starting Date:  "+formatDate(new Date(detail.start_dttm))+"  Ending Date:  "+formatDate(new Date(detail.end_dttm))+" Updated Date:  "+formatDate(new Date(detail.update_dttm))+"  Batch Status:  "+detail.batch_status, placement:"bottom",container:"body", trigger: "hover"});
+      		if(detail.object_type != null){	
+      			if(detail.object_type == "lot"){
+	      			var x = new Date()-detail.end_dttm;
+	      			x = changeX(x);
+	      			/*if(x >= 7200000){
+	      	        	x = x  - 7200000;
+	      	        }*/
+	      	      var interval = 5;
+	      			if(profile == 1){
+ 						interval = lot_usreno;
+ 					}else if(profile == 2){
+ 						interval = lot_uscolo;
+ 					}else if(profile == 3){
+ 						interval = lot_ukreno;
+ 					}else if(profile == 4){
+ 						interval = lot_ukcolo;
+ 					}	
+	      	        
+	      	        
+	      			
+	      				if(detail.batch_id == -1){
+	      					$('#row1'+div).css("background-color", "");
+	      				}
+	      				else if(x < convertMinutesToMilliSec(interval)){
+	          				$('#row1'+div).css("background-color", "#98FB98");
+	          			}
+	          			else if(x < convertMinutesToMilliSec(interval*1.25)){
+	          				$('#row1'+div).css("background-color", "#F6EA56");
+	          			}
+	          			else{
+	          				$('#row1'+div).css("background-color", "#F71B0D");
+	          			}
+      			
+      			var x = document.getElementById("row1"+div+"h1s2");
+      			x.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y = document.getElementById("row1"+div+"h1s4");
+      			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z = document.getElementById("row1"+div+"h1s1");
+      				if(detail.batch_id == -1){
+      					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      				}
+      				else if(detail.batch_status.trim().toLowerCase() == 'z'){
+          				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+          				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else{
+          				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			var w = document.getElementById("row1"+div+"h1s3");
+          		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+          		$('#row1'+div).attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Lot&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+      		}
+      		else if(detail.object_type == 'buyer'){
+      			var x = new Date()-detail.end_dttm;
+      			x = changeX(x);
+      			/*if(x >= 7200000){
+      	        	x = x  - 7200000;
+      	        }*/
+      	      var interval = 60;
+      	        
+      				if(profile == 1){
+						interval = buyer_usreno;
+					}else if(profile == 2){
+						interval = buyer_uscolo;
+					}else if(profile == 3){
+						interval = buyer_ukreno;
+					}else if(profile == 4){
+						interval = buyer_ukcolo;
+					}	
+      	        
+      	        
+          			if(detail.batch_id == -1){
+      					$('#row2'+div).css("background-color", "");
+      				}
+      				else if(x < convertMinutesToMilliSec(interval)){
+          				$('#row2'+div).css("background-color", "#98FB98");
+          			}
+          			else if(x < convertMinutesToMilliSec(interval*1.25)){
+          				$('#row2'+div).css("background-color", "#F6EA56");
+          			}
+          			else{
+          				$('#row2'+div).css("background-color", "#F71B0D");
+          			}
+      			
+      			var x = document.getElementById("row2"+div+"h1s2");
+      			x.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y = document.getElementById("row2"+div+"h1s4");
+      			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z = document.getElementById("row2"+div+"h1s1");
+          			if(detail.batch_id == -1){
+      					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      				}
+          			else if(detail.batch_status.trim().toLowerCase() == 'z'){
+          				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+          				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else{
+          				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			var w = document.getElementById("row2"+div+"h1s3");
+          		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+          		$('#row2'+div).attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Buyer&nbsp&nbsp&nbsp  </b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+      			
+      		}
+				else if(detail.object_type == 'seller'){
+					var x = new Date()-detail.end_dttm;
+					x = changeX(x);
+					/*if(x >= 7200000){
+	      	        	x = x  - 7200000;
+	      	        }*/
+	      	      var interval = 60;
+					if(profile == 1){
+ 						interval = seller_usreno;
+ 					}else if(profile == 2){
+ 						interval = seller_uscolo;
+ 					}else if(profile == 3){
+ 						interval = seller_ukreno;
+ 					}else if(profile == 4){
+ 						interval = seller_ukcolo;
+ 					}	
+	      	        
+	      	        
+						if(detail.batch_id == -1){
+      					$('#row3'+div).css("background-color", "");
+      				}
+      				else if(x < convertMinutesToMilliSec(interval)){
+          				$('#row3'+div).css("background-color", "#98FB98");
+          			}
+          			else if(x < convertMinutesToMilliSec(interval*1.25)){
+          				$('#row3'+div).css("background-color", "#F6EA56");
+          			}
+          			else{
+          				$('#row3'+div).css("background-color", "#F71B0D");
+          			}
+					
+      			var x = document.getElementById("row3"+div+"h1s2");
+      			x.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y = document.getElementById("row3"+div+"h1s4");
+      			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z = document.getElementById("row3"+div+"h1s1");
+          			if(detail.batch_id == -1){
+      					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      				}
+          			else if(detail.batch_status.trim().toLowerCase() == 'z'){
+          				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+          				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else{
+          				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			var w = document.getElementById("row3"+div+"h1s3");
+          		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+          		$('#row3'+div).attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Seller&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+      			
+      		}
+				else if(detail.object_type == 'video'){
+					var x = new Date()-detail.end_dttm;
+					x = changeX(x);
+					/*if(x >= 7200000){
+	      	        	x = x  - 7200000;
+	      	        }*/
+	      	      var interval = 60;
+					if(profile == 1){
+ 						interval = video_usreno;
+ 					}else if(profile == 2){
+ 						interval = video_uscolo;
+ 					}else if(profile == 3){
+ 						interval = video_ukreno;
+ 					}else if(profile == 4){
+ 						interval = video_ukcolo;
+ 					}	
+	      	        
+	      	        
+	      			
+						if(detail.batch_id == -1){
+      					$('#row4'+div).css("background-color", "");
+      				}
+      				else if(x < convertMinutesToMilliSec(interval)){
+          				$('#row4'+div).css("background-color", "#98FB98");
+          			}
+          			else if(x < convertMinutesToMilliSec(interval*1.25)){
+          				$('#row4'+div).css("background-color", "#F6EA56");
+          			}
+          			else{
+          				$('#row4'+div).css("background-color", "#F71B0D");
+          			}
+					
+      			var x = document.getElementById("row4"+div+"h1s2");
+      			x.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y = document.getElementById("row4"+div+"h1s4");
+      			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z = document.getElementById("row4"+div+"h1s1");
+          			if(detail.batch_id == -1){
+      					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      				}
+          			else if(detail.batch_status.trim().toLowerCase() == 'z'){
+          				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+          				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else{
+          				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			var w = document.getElementById("row4"+div+"h1s3");
+          		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+          		$('#row4'+div).attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Video&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+      			
+      		}
+				else if(detail.object_type.toLowerCase()=='image_reno'){
+					var x = new Date()-detail.end_dttm;
+					x = changeX(x);
+					/*if(x >= 7200000){
+	      	        	x = x  - 7200000;
+	      	        }*/
+	      	      var interval = 60;
+	      	    	if(profile == 1){
+						interval = image_usreno;
+					}else if(profile == 2){
+						interval = image_uscolo;
+					}else if(profile == 3){
+						interval = image_ukreno;
+					}else if(profile == 4){
+						interval = image_ukcolo;
+					}	
+						if(detail.batch_id == -1){
+      					$('#row5div1').css("background-color", "");
+      					$('#row5div3').css("background-color", "");
+      				}
+      				else if(x < convertMinutesToMilliSec(interval)){
+          				$('#row5div1').css("background-color", "#98FB98");
+          				$('#row5div3').css("background-color", "#98FB98");
+          			}
+          			else if(x < convertMinutesToMilliSec(interval*1.25)){
+          				$('#row5div1').css("background-color", "#F6EA56");
+          				$('#row5div3').css("background-color", "#F6EA56");
+          			}
+          			else{
+          				$('#row5div1').css("background-color", "#F71B0D");
+          				$('#row5div3').css("background-color", "#F71B0D");
+          			}
+					
+      			var x = document.getElementById("row5div1h1s2");
+      			x.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y = document.getElementById("row5div1h1s4");
+      			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z = document.getElementById("row5div1h1s1");
+      			var x1 = document.getElementById("row5div3h1s2");
+      			x1.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y1 = document.getElementById("row5div3h1s4");
+      			y1.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z1 = document.getElementById("row5div3h1s1");
+      			
+          			if(detail.batch_id == -1){
+      					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      					z1.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      				}
+      				else if(detail.batch_status.trim().toLowerCase() == 'z'){
+          				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          				z1.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+          				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          				z1.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else{
+          				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          				z1.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			var w = document.getElementById("row5div1h1s3");
+          		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+          		$('#row5div1').attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Image&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+      			
+          		var w1 = document.getElementById("row5div3h1s3");
+         		 w1.innerHTML = formatDate(new Date(detail.update_dttm));
+         		$('#row5div3').attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Image&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");	
+          		
+      		    } 
+			else if(detail.object_type.toLowerCase()=='image_colo'){
+				var x = new Date()-detail.end_dttm;
+				x = changeX(x);
+				/*if(x >= 7200000){
+      	        	x = x  - 7200000;
+      	        }	*/
+				var interval = 60;
+      	    	if(profile == 1){
+					interval = image_usreno;
+				}else if(profile == 2){
+					interval = image_uscolo;
+				}else if(profile == 3){
+					interval = image_ukreno;
+				}else if(profile == 4){
+					interval = image_ukcolo;
+				}	
+					if(detail.batch_id == -1){
+						$('#row5div2').css("background-color", "");
+     					$('#row5div4').css("background-color", "");
+     				}
+     				else if(x < convertMinutesToMilliSec(interval)){
+         				$('#row5div2').css("background-color", "#98FB98");
+         				$('#row5div4').css("background-color", "#98FB98");
+         			}
+         			else if(x < convertMinutesToMilliSec(interval*1.25)){
+         				$('#row5div2').css("background-color", "#F6EA56");
+         				$('#row5div4').css("background-color", "#F6EA56");
+         			}
+         			else{
+         				$('#row5div2').css("background-color", "#F71B0D");
+         				$('#row5div4').css("background-color", "#F71B0D");
+         			}
+				
+     			var x = document.getElementById("row5div4h1s2");
+     			x.innerHTML = "  Batch ID : "+detail.batch_id;
+     			var y = document.getElementById("row5div4h1s4");
+     			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+     			var z = document.getElementById("row5div4h1s1");
+     			
+     			var x1 = document.getElementById("row5div2h1s2");
+     			x1.innerHTML = "  Batch ID : "+detail.batch_id;
+     			var y1 = document.getElementById("row5div2h1s4");
+     			y1.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+     			var z1 = document.getElementById("row5div2h1s1");
+     			
+         			if(detail.batch_id == -1){
+     					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+     					z1.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+     				}
+     				else if(detail.batch_status.trim().toLowerCase() == 'z'){
+         				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+         				z1.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+         			}
+         			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+         				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+         				z1.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+         			}
+         			else{
+         				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+         				z1.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+         			}
+         			var w = document.getElementById("row5div4h1s3");
+         		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+         		$('#row5div4').attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Image&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+         		 
+         		var w1 = document.getElementById("row5div2h1s3");
+        		 w1.innerHTML = formatDate(new Date(detail.update_dttm));
+        		$('#row5div2').attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Image&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+        		 
+         		
+     		}else if(detail.object_type == 'attr'){
+     			var x = new Date()-detail.end_dttm;
+     			x = changeX(x);
+     			/*if(x >= 7200000){
+      	        	x = x  - 7200000;
+      	        }*/
+      	        var interval = 60;
+     					if(profile == 1){
+     						interval = attr_usreno;
+     					}else if(profile == 2){
+     						interval = attr_uscolo;
+     					}else if(profile == 3){
+     						interval = attr_ukreno;
+     					}else if(profile == 4){
+     						interval = attr_ukcolo;
+     					}		
+      	        
+      	        
+						if(detail.batch_id == -1){
+      					$('#row6'+div).css("background-color", "");
+      				}
+      				else if(x <= convertMinutesToMilliSec(interval)){
+          				$('#row6'+div).css("background-color", "#98FB98");
+          			}
+          			else if(x <= convertMinutesToMilliSec(interval*1.25)){
+          				$('#row6'+div).css("background-color", "#F6EA56");
+          			}
+          			else{
+          				$('#row6'+div).css("background-color", "#F71B0D");
+          			}
+					
+      			var x = document.getElementById("row6"+div+"h1s2");
+      			x.innerHTML = "  Batch ID : "+detail.batch_id;
+      			var y = document.getElementById("row6"+div+"h1s4");
+      			y.innerHTML = "  Batch Status : "+detail.batch_status+"     ";
+      			var z = document.getElementById("row6"+div+"h1s1");
+          			if(detail.batch_id == -1){
+      					z.innerHTML = '<img src="../../images/black.png" th:src="@{/images/black.png}" th:alt="lot" height="10" width="10"/>';
+      				}
+      				else if(detail.batch_status.trim().toLowerCase() == 'z'){
+          				z.innerHTML = '<img src="../../images/tick.png" th:src="@{/images/tick.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else if(detail.batch_status.toLowerCase().trim() == 'ce'){
+          				z.innerHTML = '<img src="../../images/mistake.png" th:src="@{/images/mistake.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			else{
+          				z.innerHTML = '<img src="../../images/progress.png" th:src="@{/images/progress.png}" th:alt="lot" height="20" width="20"/>';
+          			}
+          			var w = document.getElementById("row6"+div+"h1s3");
+          		 w.innerHTML = formatDate(new Date(detail.update_dttm));
+          		$('#row6'+div).attr('data-original-title', "<div style='background-color: #696969;color:#FFFFFF;'> <h6>Object Type: <b>Attr&nbsp&nbsp&nbsp</b> Batch ID:<b>  "+detail.batch_id+" </b></h6> <h6>Starting Date:<b>  "+formatDate(new Date(detail.start_dttm))+" </b></h6> <h6>Ending Date:<b>  "+formatDate(new Date(detail.end_dttm))+" </b></h6> <h6>Count:<b>  "+detail.object_count+" </b></h6></div>");
+      			
+      		}
+		 
+      		} 
+	 }			// end of fillDiv fn
+	 
+	 	
+	 		function changeX(x){
+		 		// comment this if part when deploying on server
+	 			/*if(x >= 7200000){
+      	        	x = x  - 7200000;
+      	        }*/
+	 			return x;
+	 		}
+				        	   
+				        	   timer = setInterval ( tableData, time1 );	
+				        	   
+				        	   $("#row1div1").click(function(){
+				        		   if(usRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=1&profile=1";
+					        		   drawGraph(graphTodayUrl);
+					        		   forGraphTitle(1, 1);
+				        		   }
+				        	   });
+				        	   $("#row1div2").click(function(){
+				        		   if(usColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=1&profile=2";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(1, 2);
+				        		   }
+				        	   });
+				        	   $("#row1div3").click(function(){
+				        		   if(ukRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=1&profile=3";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(1, 3);
+				        		   }
+				        	   });
+				        	   $("#row1div4").click(function(){
+				        		   if(ukColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=1&profile=4";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(1, 4);
+				        		   }
+				        	   });
+				        	   $("#row2div1").click(function(){
+				        		   if(usRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=2&profile=1";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(2, 1);
+				        		   }
+				        	   });
+				        	   $("#row2div2").click(function(){
+				        		   if(usColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=2&profile=2";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(2, 2);
+				        		   }
+				        	   });
+				        	   $("#row2div3").click(function(){
+				        		   if(ukRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=2&profile=3";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(2, 3);
+				        		   }
+				        	   });
+				        	   $("#row2div4").click(function(){
+				        		   if(ukColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=2&profile=4";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(2, 4);
+				        		   }
+				        	   });
+				        	   $("#row3div1").click(function(){
+				        		   if(usRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=3&profile=1";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(3, 1);
+				        		   }
+				        	   });
+				        	   $("#row3div2").click(function(){
+				        		   if(usColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=3&profile=2";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(3, 2);
+				        		   }
+				        	   });
+				        	   $("#row3div3").click(function(){
+				        		   if(ukRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=3&profile=3";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(3, 3);
+				        		   }
+				        	   });
+				        	   $("#row3div4").click(function(){
+				        		   if(ukColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=3&profile=4";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(3, 4);
+				        		   }
+				        	   });
+				        	   $("#row4div1").click(function(){
+				        		   if(usRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=4&profile=1";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(4, 1);
+				        		   }
+				        	   });
+				        	   $("#row4div2").click(function(){
+				        		   if(usColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=4&profile=2";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(4, 2);
+				        		   }
+				        	   });
+				        	   $("#row4div3").click(function(){
+				        		   if(ukRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=4&profile=3";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(4, 3);
+				        		   }
+				        	   });
+				        	   $("#row4div4").click(function(){
+				        		   if(ukColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=4&profile=4";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(4, 4);
+				        		   }
+				        	   });
+				        	   $("#row5div1").click(function(){
+				        		   if(usRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=5&profile=1";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(5, 1);
+				        		   }
+				        	   });
+				        	   $("#row5div2").click(function(){
+				        		   if(usColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=5&profile=2";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(5, 2);
+				        		   }
+				        	   });
+				        	   $("#row5div3").click(function(){
+				        		   if(ukRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=5&profile=3";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(5, 3);
+				        		   }
+				        	   });
+				        	   $("#row5div4").click(function(){
+				        		   if(ukColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=5&profile=4";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(5, 4);
+				        		   }
+				        	   });
+				        	   $("#row6div1").click(function(){
+				        		   if(usRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=6&profile=1";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(6, 1);
+				        		   }
+				        	   });
+				        	   $("#row6div2").click(function(){
+				        		   if(usColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=6&profile=2";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(6, 2);
+				        		   }
+				        	   });
+				        	   $("#row6div3").click(function(){
+				        		   if(ukRenoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=6&profile=3";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(6, 3);
+				        		   }
+				        	   });
+				        	   $("#row6div4").click(function(){
+				        		   if(ukColoMariadb_conf_flag){
+				        			   graphTodayUrl = "/graphToday?pass=6&profile=4";
+				        		   drawGraph(graphTodayUrl);
+				        		   forGraphTitle(6, 4);
+				        		   }
+				        	   });
+				        	   
+				        	   
+				        	   
+				        	   function forGraphTitle(pass, profile){
+				        			 var str1 = "Lot";
+				        			 var str2 = "US_Reno";
+				        			 var range = 0;
+				        			 if( pass == 1){
+				        				 str1 = "Lot";
+				        			 }
+				        			 else if (pass == 2){
+				        				 str1 = "Buyer";
+				        			 }
+				        			 else if(pass == 3){
+				        				 str1 = "Seller";
+				        			 }
+				        			 else if(pass == 4){
+				        				 str1 = "Video";
+				        			 }
+				        			 else if(pass == 5){
+				        				 str1 = "Image";
+				        			 }
+				        			 else if(pass == 6){
+				        				 str1 = "Attr";
+				        			 }
+				        			 
+				        			 
+				        			 
+				        			 if(profile == 1){
+				        				 str2 = "US_Reno";
+				        			 }
+				        			 else if(profile == 2){
+				        				 str2 = "US_Colo";
+				        			 }
+				        			 else if(profile == 3){
+				        				 str2 = "UK_Reno";
+				        			 }
+				        			 else if(profile == 4){
+				        				 str2 = "UK_Colo";
+				        			 }
+				        			 
+				        			 document.getElementById("fortitle").innerHTML = str1 + " in " + str2;
+				        			
+				        		 }
+				        		 
+				        	   
+				        	   
+				        	   
+				        	   
+				        	   
+				        	   
+				        	   var param = new Array();
+				    			 var start = new Array();
+				    			 var count = new Array();
+				         	     var object;
+				         	     
+				                 function drawGraph(graphUrl){
+				                	 
+				                	   param = [];
+					               	   start = [];
+					               	   count = [];
+					               	   
+				                	 //console.log("Graph Url is "+graphUrl);
+				                	 $.get(graphUrl, function(data) {
+				                		 $.each(data, function(i, list) {
+				    		            	  $.each(list,function(j,detail){
+				    		            		   
+				    			               	   //console.log("list detail  is [ "+detail.batch_id+" ]")
+				    			               			if(detail.param < 0){
+				    			                   		 	param.push(-1*detail.param);
+				    			                   			//console.log("entered1");
+				    			                   		 }
+				    			               			//else if(detail.param >= 3000 || detail.param == null){
+				    				                   		//	 param.push(3000);
+				    				                   		//console.log("entered2");
+				    				                   	//}
+				    			               			else{
+				    				                   			 param.push(detail.param);
+				    				                   		//console.log("entered3");
+				    				                   	}
+				    			               			//console.log("param is "+detail.param +"start date is "+new Date(detail.start_dttm));
+				    			               			detail.end_dttm = detail.end_dttm; 
+				    			               			start.push(new Date(detail.end_dttm));
+				     				            		 count.push(detail.object_count);
+				     				            		 object = detail.object_type.toUpperCase();
+				     				            		 
+				    		            		  
+				    		            	  });	// end of second loop
+				            			 });	// end of first loop
+				            			 
+				                		 google.charts.load('current', {packages: ['corechart', 'bar']});
+				                    	 google.charts.setOnLoadCallback(drawChart);
+				                	 });	// end of get graphUrl
+				                	 
+				                	 //setTimeout(drawChart, 1500);
+				                	 
+				                	 //callback();
+				                	//google.charts.load('current', {packages: ['corechart', 'bar']});
+				     				//google.charts.setOnLoadCallback(drawChart);
+				                 } // end of draw graph fn
+				                 //alert(convertMinutesToMilliSec(5));
+				                 
+				                 function convertMinutesToMilliSec(min){
+				                	 if(min <= 10)
+				                	{
+				                		return (min+1)*60*1000;	 
+				                	}
+				                	 else if(min <= 30)
+				                	{
+				                		 return (min+5)*60*1000;
+				                	}
+				                	 else{
+				                		 return (min+10)*60*1000; 
+				                	 }
+				                 }
+				                 
+				                 function convertHoursToMilliSec(hr){
+				                	 if(hr < 2)
+				                	{
+				                		return ((hr)*60*60*1000) + 10*60*1000 ;	 
+				                	}
+				                	 else if(hr < 5)
+				                	{
+				                		 return (hr+1)*60*60*1000;
+				                	}
+				                	 else{
+				                		 return (hr+2)*60*60*1000; 
+				                	 }
+				                 }
+				                 
+				                 
+				                 function drawChart(){
+				                	//alert($(window).width());
+				                   var object2;
+				              	   var maxobject = 0;
+				              	   
+				              	   //console.log(count.length);  
+				              	var data = new google.visualization.DataTable();
+				      			 data.addColumn('datetime', 'startdate');
+				      			 data.addColumn("number", 'Time Taken');
+				      			 if(object=='IMAGE_RENO' || object=='IMAGE_COLO' ){
+				      			  //maxobject = 30;
+				      			  object2 = 'Time Taken in minutes';
+				      			 }
+				      			 else if( object =='LOT'){
+				      				 object2 = 'Time Taken in minutes';
+				      			 	 //maxobject = 3;
+				      			 }
+				      			 else{
+				      			  //maxobject = 10;
+				      			  object2 = 'Time Taken in seconds';
+				      			 }
+				      			 
+				      			    data.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+				      		   for(i=0;i<param.length; i++){
+				      			 //console.log("param is "+param[i] +" start date is "+start[i]);
+				      			 if(count[i] != null){
+				      			 	count[i] = count[i].replace(/\D/g,'');
+				      			 }
+				      			   		   if(object=='IMAGE_RENO' || object=='IMAGE_COLO'){
+				      			   			//if(Number(param[i]) > 3000){
+				      					   		//param[i] = 3000;
+				      					   		//}
+				      			   			   data.addRow([start[i], Number(param[i])/60, cretaeCustomHTMLContent(count[i],formatDate(start[i]), Number(param[i])/60,2) ]);
+				      						   maxobject = maxobject + Number(param[i])/60;
+				      						   
+				      					   }else if( object =='LOT'){
+				      						   //if(Number(param[i]) > 300){
+				      						   	//	param[i] = 300;
+				      						   		//}
+				      						   data.addRow([start[i], Number(param[i])/60, cretaeCustomHTMLContent(count[i],formatDate(start[i]), Number(param[i])/60,2) ]);
+				      						   maxobject = maxobject + Number(param[i])/60;
+				      						   
+				      						   //console.log(maxobject);
+				      					   }
+				      					   else{//console.log(Number(param[i]));
+				      							  // if(Number(param[i]) > 120){
+				      							   	//	param[i] = 120;
+				      							   		//}
+				      							data.addRow(  [start[i], Number(param[i]), cretaeCustomHTMLContent(count[i],formatDate(start[i]), Number(param[i]),1) ]);
+				      							maxobject = maxobject + Number(param[i]);
+				      							//console.log(maxobject);
+				      						}
+				      		  			
+				      			   }
+							      		   maxobject = maxobject/(param.length-1)*3;
+							      		   
+							      		   var options = {
+							      		     hAxis: {
+							      		       title: 'Start Date',
+							      		       format: "d MMM h:00 aa"
+							      		     },
+							      		     vAxis: {
+							      		       title: object2,
+							      		       viewWindowMode:'explicit',
+							      	              viewWindow:{
+							      	                min:0,
+							      	                max:maxobject
+							      	              }
+							      		     },
+							      		   tooltip: { isHtml: true },
+							      		     backgroundColor: '#ffffff','width':size,'height':200
+							      		   };
+							
+							      		   var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+							      		   chart.draw(data, options);
+				              	   
+				                 }	//end of drawChart
+				                 
+				                 
+				                 function cretaeCustomHTMLContent(count, start, time, units){
+				                	 if(units == 1){
+				                	 return '<div style="padding:1px 1px 1px 2px; ">' + 
+				                	 		 '<table style="text-align: left;" width="225" cellpadding="0" border="0" cellspacing="0">'+
+				                	 		 '<tr><td> <h6 class="spacer"> <span style="color:#0000cc;">Count  :</span> <b><span style="color:#000000;">'+count+'</span></b></h6></td></tr>'+
+				                	 		 '<tr><td> <h6 class="spacer"> <span style="color:#0000cc;">Start Date  :</span> <b><span style="color:#000000;">'+start+'</span></b></h6></td></tr>'+
+				                	 		 '<tr><td> <h6 class="spacer"> <span style="color:#0000cc;">Time Taken  :</span> <b><span style="color:#000000;">'+time.toFixed(2)+' sec</span></b></h6></td></tr>'+
+				                	 		 '</table></div>';
+				                	 }
+				                	 else{
+				                		 return '<div style="padding:1px 1px 1px 2px; ">' + 
+					            	 		 '<table style="text-align: left;" width="225" cellpadding="0" border="0" cellspacing="0">'+
+					            	 		 '<tr><td> <h6 class="spacer"> <span style="color:#0000cc;">Count  :</span> <b><span style="color:#000000;">'+count+'</span></b></h6></td></tr>'+
+					            	 		 '<tr><td> <h6 class="spacer"> <span style="color:#0000cc;">Start Date  :</span> <b><span style="color:#000000;">'+start+'</span></b></h6></td></tr>'+
+					            	 		 '<tr><td> <h6 class="spacer"> <span style="color:#0000cc;">Time Taken  :</span> <b><span style="color:#000000;">'+time.toFixed(2)+' min</span></b></h6></td></tr>'+
+					            	 		 '</table></div>'; 
+				                	 }
+				                 }
+				        	   
+				        	   
+				        	   
+				        	   
+				        	   /* Assign empty url value to the iframe src attribute when
+				                modal hide, which stop the video playing */
+				                $("#myModal").on('hide.bs.modal', function(){
+				                    $("#cartoonVideo").attr('src', '');
+				                });
+				                
+				                /* Assign the initially stored url back to the iframe src
+				                attribute when modal is displayed again */
+				                $("#myModal").on('show.bs.modal', function(){
+				                    $("#paginationinIframe").attr('src', paginationUrl);
+				                });     	   
+				   					
+				                
+				                  var From = new Date($("#datepicker1").val());
+				                  console.log(From);
+				                  console.log(pstConversion(From));
+				    		      var To = new Date($("#datepicker2").val());
+				    		      console.log(To);
+				    		      console.log(pstConversion(To));
+				    		      var obj =$("#thisObject").val();
+				    		  	  var profile = 1;
+					       		      	$("#datepicker1").on("change", function () {
+					       				    From = new Date($(this).val());
+					       				 	From.setDate(From.getDate()+1);
+					    		 			
+					       				   // console.log(From);
+					       				 //console.log(pstConversion(From));
+					       				    });
+					       				$("#datepicker2").on("change", function () {
+					       				    To = new Date($(this).val());
+					       				 	To.setDate(To.getDate()+3);
+					       				 	//console.log(To);
+					       				 //console.log(pstConversion(To));
+					       				    });
+					       				$("#thisObject").on("change", function () {
+					       				    obj = $(this).val();
+					       				    });
+					       				$("#thisProfile").on("change", function () {
+					       				    profile = $(this).val();
+					       				    });
+					       				
+				    		 			$("#myBtn").click(function(){
+				                    		//alert(From + " "+ To);
+				    	                	
+				                		var graphUrl = "/graphRange?obj="+obj+"&profile="+profile+"&From="+From+"&To="+To;
+				                		graphTodayUrl = "/graphRange?obj="+obj+"&profile="+profile+"&From="+From+"&To="+To;
+				                		if(obj == 1){
+				                		
+				        				forGraphTitle(1, profile);
+				        				
+				                		}
+				                		else if(obj == 2){
+				                    		
+				            				forGraphTitle(2,profile);
+				                    	}
+				                		else if(obj == 3){
+				                    		
+				            				forGraphTitle(3, profile);
+				                    	}
+				                		else if(obj == 4){
+				                    		
+				            				forGraphTitle(4, profile);
+				                    	}
+				                		else if(obj == 5){
+				                			
+				                			forGraphTitle(5, profile);
+				                    	}
+				                		else if(obj == 6){
+				                    		
+				            				forGraphTitle(6, profile);
+				                    	}
+				                		
+				                		drawGraph(graphUrl);	
+				                    });
+				        	   
+				        	   
+				        	   
+				        	   
+				        	   function formatDate(date) {
+				                 	  var hours = date.getHours();
+				                 	  var minutes = date.getMinutes();
+				                 	  var seconds = date.getSeconds();
+				                 	  var ampm = hours >= 12 ? 'PM' : 'AM';
+				                 	  hours = hours % 12;
+				                 	  hours = hours ? hours : 12; // the hour '0' should be '12'
+				                 	  minutes = minutes < 10 ? '0'+minutes : minutes;
+				                 	  seconds = seconds < 10 ? '0'+seconds : seconds;
+				                 	  var strTime = hours + ':' + minutes+ ':' +seconds + ' ' + ampm;
+				                 	  return myMonth(date.getMonth()) + " " + date.getDate() + " " + date.getFullYear() + "  " + strTime;
+				                 	}
+				        	   
+				        	   function myMonth(i) {
+				                     var month = new Array();
+				                     month[0] = "Jan";
+				                     month[1] = "Feb";
+				                     month[2] = "Mar";
+				                     month[3] = "Apr";
+				                     month[4] = "May";
+				                     month[5] = "June";
+				                     month[6] = "July";
+				                     month[7] = "Aug";
+				                     month[8] = "Sep";
+				                     month[9] = "Oct";
+				                     month[10] = "Nov";
+				                     month[11] = "Dec";
+				                     var n = month[i];
+				                     return n;
+				                 }
+				        	   
+				        	   
+				        	   function pstConversion(from){
+				        		   var convertedTime= moment.tz(from, "America/Los_Angeles").format("MM-DD-YYYY");
+				        		   return convertedTime;
+				        	    }
+				        	   
+				        	   
+				        	   
+				        	   
+				           }); // end of jQuery ready fn
+				           
+				           
+				           
+				           
+				           
+				/*]]>*/
+			</script>
+			
+			
+			
+				 <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title">PAGINATION</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe id="paginationinIframe" width="850" height="400" src=" " ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+			
+			
+</body>
+</html>

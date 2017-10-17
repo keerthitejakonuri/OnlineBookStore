@@ -1,0 +1,277 @@
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  profiles: Prod
+  host: msgsmtp.copart.com
+  datasource: 
+    usrenomariadb:
+      url: jdbc:mariadb://rnpcas001.copart.com:3306/misprddb
+      schema: misprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_prod_sync
+      password: RA2rekaT
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    ukrenomariadb:
+      url: jdbc:mariadb://rnpcas001.copart.com:3306/gbrprddb
+      schema: gbrprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_prod_sync
+      password: RA2rekaT
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    uscolomariadb:
+      url: jdbc:mariadb://lvpmdw101:3306/misprddb
+      schema: misprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_prod_sync
+      password: RA2rekaT
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+          
+    ukcolomariadb:
+      url: jdbc:mariadb://lvpmdw101:3306/gbrprddb
+      schema: gbrprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_prod_sync
+      password: RA2rekaT
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    usdb2:
+      url: jdbc:as400://ETLDB.COPART.COM/copdta
+      driverClassName: com.ibm.as400.access.AS400JDBCDriver
+      username: SOLRBTSYNC
+      password: CrlE4lUmia
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 FROM SYSIBM.SYSDUMMY1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    ukdb2:
+      url: jdbc:as400://ETLDB.COPART.COM/copdta
+      driverClassName: com.ibm.as400.access.AS400JDBCDriver
+      username: SOLRBTSYNC
+      password: CrlE4lUmia
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 FROM SYSIBM.SYSDUMMY1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    schedulerdb:
+      url: jdbc:mariadb://rnd1ds002.copart.com:3222/guthite
+      driverClassName: org.mariadb.jdbc.Driver
+      schema: guthite  
+      username: guthite
+      password: guru@123
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 
+      validationInterval: 3
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 3
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+      
+---
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  profiles: Qa
+  host: msgsmtp.copart.com
+  datasource: 
+    usrenomariadb:
+      url: jdbc:mariadb://rndcas001.copart.com:3306/misprddb
+      schema: misprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_qa_sync
+      password: M@h2Jq1La
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    ukrenomariadb:
+      url: jdbc:mariadb://rndcas001.copart.com:3306/gbrprddb
+      schema: gbrprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_qa_sync
+      password: M@h2Jq1La
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    uscolomariadb:
+      url: jdbc:mariadb://rndcas001.copart.com:3306/misprddb
+      schema: misprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_qa_sync
+      password: M@h2Jq1La
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: false
+    
+    ukcolomariadb:
+      url: jdbc:mariadb://rndcas001.copart.com:3306/gbrprddb
+      schema: gbrprddb
+      driverClassName: org.mariadb.jdbc.Driver
+      username: solr_bat_qa_sync
+      password: M@h2Jq1La
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: false
+      
+    usdb2:
+      url: jdbc:as400://rnqdb001/copdta
+      driverClassName: com.ibm.as400.access.AS400JDBCDriver
+      username: sqluser
+      password: bret
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 FROM SYSIBM.SYSDUMMY1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    ukdb2:
+      url: jdbc:as400://rnqdb001/copdta
+      driverClassName: com.ibm.as400.access.AS400JDBCDriver
+      username: sqluser
+      password: bret
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 FROM SYSIBM.SYSDUMMY1
+      validationInterval: 30000
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 30000
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
+      
+    schedulerdb:
+      url: jdbc:mariadb://rndcas001.copart.com:3306/copdta
+      driverClassName: org.mariadb.jdbc.Driver
+      schema: copdta  
+      username: solr_bat_qa_sync
+      password: M@h2Jq1La
+#ConnectionPoolSettings
+      testOnBorrow: true
+      validationQuery: SELECT 1 
+      validationInterval: 3
+      maxActive: 100
+      maxIdle: 100
+      minIdle: 10
+      initialSize: 10
+      maxWait: 3
+      testWhileIdle: false
+      minEvictableIdleTimeMillis: 60000
+      conf_flag: true
