@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ocrs.login.model.Registration" table="REGISTRATION" catalog="ocrs">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native"/>
+        </id>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id"/>
+        </property>
+   		<property name="courseId" type="java.lang.Integer">
+            <column name="course_id"/>
+        </property>
+    </class>
+</hibernate-mapping>

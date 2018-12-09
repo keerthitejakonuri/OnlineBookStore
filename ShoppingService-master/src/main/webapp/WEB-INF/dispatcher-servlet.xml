@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<mvc:annotation-driven />
+	<tx:annotation-driven />
+	<context:component-scan base-package="com.wpl.services" />
+
+	<!-- bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"> 
+		<property name="templateLoaderPath" value="/WEB-INF/views/" /> </bean> <bean 
+		id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"> 
+		<property name="cache" value="true" /> <property name="prefix" value="" /> 
+		<property name="suffix" value=".ftl" /> </bean> -->
+
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://192.168.159.128:3306/shoppingdb?zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="root" />
+		<property name="password" value="guru" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.wpl.tablemap" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<!-- Add DB Mapping Classes Here -->
+				<value>com.wpl.tablemap.LoginDetails</value>
+				<value>com.wpl.tablemap.PaymentDetails</value>
+				<value>com.wpl.tablemap.PlaceOrder</value>
+				<value>com.wpl.tablemap.ProductDetails</value>
+				<value>com.wpl.tablemap.Registration</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>
+
+	<!-- bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">
+		<property name="servers" value="127.0.0.1:11211" />
+		<property name="protocol" value="BINARY" />
+		<property name="transcoder">
+			<bean class="net.spy.memcached.transcoders.SerializingTranscoder">
+				<property name="compressionThreshold" value="1024" />
+			</bean>
+		</property>
+		<property name="opTimeout" value="100000" />
+		<property name="timeoutExceptionThreshold" value="1998" />
+		<property name="locatorType" value="CONSISTENT" />
+		<property name="failureMode" value="Redistribute" />
+		<property name="useNagleAlgorithm" value="false" />
+	</bean -->
+
+</beans>

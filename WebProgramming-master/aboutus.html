@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Login</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+ 
+
+ 
+$(document).ready(function(){
+	<!--logout -->
+	if(localStorage.getItem("sessionKey") == null)
+		window.location.replace('/FES/site/static/login');
+	
+	
+	 $.fn.serializeObject = function()
+	 {
+	     var o = {};
+	     var a = this.serializeArray();
+	     $.each(a, function() {
+	         if (o[this.name] !== undefined) {
+	             if (!o[this.name].push) {
+	                 o[this.name] = [o[this.name]];
+	             }
+	             o[this.name].push(this.value || '');
+	         } else {
+	             o[this.name] = this.value || '';
+	         }
+	     });
+	     return o;
+	 };
+	
+	if(localStorage.getItem("role") == 'Student'){
+		$('[data-admin]').hide();
+		$('[data-student]').show();
+	}
+	else if(localStorage.getItem("role") == 'Admin'){
+		$('[data-student]').hide();
+		$('[data-admin]').show();
+	}
+  
+  
+  $('#logOut').on('click', function() { 
+	  var result = confirm("Are you sure you want to logout?");
+	  if(!result){
+	    // Stop the link from working.
+	    e.preventDefault();
+	  }
+	    $.ajax({ // ajax call starts
+	      url: '/FES/api/login/logoutUser?sessionKey='+localStorage.getItem("sessionKey"), 
+	      dataType: 'json',
+	      contentType:'application/json',
+	      type:'POST'
+	    })
+	    .done(function(data) { // Variable data contains the data we get from serverside
+	    	if(data.status == 'SUCCESS'){
+	    		alert('User Logged out successfully');
+	    		window.location.replace('/FES/site/static/login');
+	    		localStorage.removeItem("sessionKey");
+	    	}else if(data.status == 'FAILURE'){
+	    		alert(data.errorMsg);
+	    	}
+	    });
+	    return false; // keeps the page from not refreshing 
+	  });
+
+  
+});
+</script>
+</head>
+<body>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header" style="width: 100%;">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="home.html">Home</a>
+				<a class="navbar-brand" href="home.html">Home</a>
+				<a class="navbar-brand" href="home.html">Home</a>
+				<button id="logOut" class="btn btn-primary pull-right">logOut</button>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse"></div>
+			<!--/.navbar-collapse -->
+		</div>
+	</nav>
+	<br />
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+	<p><pre>About UTD:
+The University of Texas at Dallas is an innovative institution in the heart of North Texas on the path to achieving Tier One national research university status.
+UT Dallas has grown since its founding in 1969 to include 137 degree programs, with cutting-edge curricula serving a variety of undergraduate and graduate student interests.
+The University continues its original commitment to providing some of the state’s most-lauded science and engineering programs and has also gained prominence for a breadth of educational paths, from criminology to biomedical engineering to arts and technology.
+The wealth of learning resources available to UT Dallas students is the result of a concentrated effort to attract the top minds on both ends of the classroom relationship. Joining the faculty’s Nobel laureate and six members of the National Academies are 550 tenured and tenure-track professors hailing from the world’s best colleges, including Harvard, MIT, Cambridge and Columbia University. In addition, UT Dallas is home to numerous centers, labs and institutes that facilitate research and opportunities for hands-on learning.
+Students, meanwhile, arrive at UT Dallas well-prepared to succeed in higher education: In 2015, 33 percent of freshmen ranked in the top 10 percent of their high school classes, and 64 percent ranked in the top 25 percent.
+With an eye toward building a future as bright as its beginnings, UT Dallas will continue its push to attain Tier One research university status and produce graduates who are well-equipped to succeed professionally.
+</pre></p>	
+
+
+
+	<hr>
+
+	<footer>
+		<p>&copy; 2016 Company, Inc.</p>
+	</footer>
+	<!-- /container -->
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+	<script src="../../dist/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css" />
+
+
+</body>
+</html>

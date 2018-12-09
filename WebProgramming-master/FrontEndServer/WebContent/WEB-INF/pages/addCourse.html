@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Login</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+ 
+
+ 
+$(document).ready(function(){
+	
+	if(localStorage.getItem("sessionKey") == null)
+		window.location.replace('/FES/site/static/login');
+	
+	$("div[data-success]").hide();
+	
+	
+	 $.fn.serializeObject = function()
+	 {
+	     var o = {};
+	     var a = this.serializeArray();
+	     $.each(a, function() {
+	         if (o[this.name] !== undefined) {
+	             if (!o[this.name].push) {
+	                 o[this.name] = [o[this.name]];
+	             }
+	             o[this.name].push(this.value || '');
+	         } else {
+	             o[this.name] = this.value || '';
+	         }
+	     });
+	     return o;
+	 };
+	
+	if(localStorage.getItem("role") == 'Student'){
+		$('[data-admin]').hide();
+		$('[data-student]').show();
+	}
+	else if(localStorage.getItem("role") == 'Admin'){
+		$('[data-student]').hide();
+		$('[data-admin]').show();
+	}
+  
+  $('#course_add').on('click', function() { 
+	  
+	  if($('#courseId').val()=='')
+	  	{
+	  	alert('Please enter Course ID ');
+	  	return false;
+	  	}
+	  if($('#courseName').val()=='')
+	  	{
+	  	alert('Please enter Course Name ');
+	  	return false;
+	  	}
+	  if($('#professorName').val()=='')
+	  	{
+	  	alert('Please enter Professor Name ');
+	  	return false;
+	  	}
+	  if($('#totalSlots').val()=='')
+	  	{
+	  	alert('Please enter Course ID ');
+	  	return false;
+	  	}
+	  if($('#availableSlots').val()=='')
+	  	{
+	  	alert('Please enter Available Slots ');
+	  	return false;
+	  	}
+	  if($('#location').val()=='')
+	  	{
+	  	alert('Please enter location ');
+	  	return false;
+	  	}
+	  if($('#startTime').val()=='')
+	  	{
+	  	alert('Please enter startTime ');
+	  	return false;
+	  	}
+	  
+	    var button = $(this).val();
+	    $.ajax({ // ajax call starts
+	      url: '/FES/api/course/addCourse?sessionKey='+localStorage.getItem("sessionKey"), 
+	      data: JSON.stringify($('form[id=courseadd]').serializeObject()), 
+	      dataType: 'json',
+	      contentType:'application/json',
+	      type:'POST'
+	    })
+	    .done(function(data) { // Variable data contains the data we get from serverside
+	    	if(data.status == 'SUCCESS'){
+	    		$("div[data-non-success]").hide();
+	    		$("div[data-success]").show();
+	    	}else if(data.status == 'FAILURE'){
+	    		alert(data.errorMsg);
+	    	}
+	    });
+	    return false; // keeps the page from not refreshing 
+	  });
+  $('#logOut').on('click', function() { 
+	  
+	  var result = confirm("Are you sure you want to logout?");
+	  if(!result){
+	    // Stop the link from working.
+	    e.preventDefault();
+	  }
+	    $.ajax({ // ajax call starts
+	      url: '/FES/api/login/logoutUser?sessionKey='+localStorage.getItem("sessionKey"), 
+	      dataType: 'json',
+	      contentType:'application/json',
+	      type:'POST'
+	    })
+	    .done(function(data) { // Variable data contains the data we get from serverside
+	    	if(data.status == 'SUCCESS'){
+	    		alert('User Logged out successfully');
+	    		window.location.replace('/FES/site/static/login');
+	    		localStorage.removeItem("sessionKey");
+	    	}else if(data.status == 'FAILURE'){
+	    		alert(data.errorMsg);
+	    	}
+	    });
+	    return false; // keeps the page from not refreshing 
+	  });
+  
+  
+});
+</script>
+</head>
+<body>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header" style="width:100%;">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home">OCRS</a>
+          <button id="logOut" class="btn btn-primary pull-right"  >logOut</button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+	<br/>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    
+    
+    <div class="jumbotron">
+      <div class="container-fluid">
+	  	<br/><br/>
+	  	<div class="list-group col-xs-3">
+	  		<br/>
+	  	  
+		  <a href="home" data-admin="true" data-student="true" class="list-group-item">Search Course</a>
+		  <a href="#" data-student="true" class="list-group-item">Register Course</a>
+		  <a href="addCourse" data-admin="true"  class="list-group-item active">Add Course</a>
+		</div> 
+	  	<div class="col-xs-8">
+	  		<h2> Add Course </h2>
+	  		<div data-non-success class="container">
+		  		<form role="form" id="courseadd" method="POST" action="/api/course/addCourse"> 
+
+			   <div class = "form-group col-xs-6">
+			     <label for="courseId">Course ID:</label>
+			     <input type="text" name= "courseId" class="form-control" id="courseId" placeholder="Enter Course Id"/>
+			  
+			     <label for="first_name">Course Name:</label>
+			     <input type="text" name= "courseName" class="form-control" id="courseName" placeholder="Enter Course Name">
+			 
+			
+			     <label for="last_name">Professor:</label>
+			     <input type="text" name = "professorName" class="form-control" id="professorName" placeholder="Enter Professor Name">
+			
+			  
+			     <label for="pwd">Course Level:</label>
+			     <input type="text" name="courseLevel" class="form-control" id="courseLevel" placeholder="Enter Course Level">
+			   
+			   
+			     <label for="pwd">Course Description:</label>
+			     <input type="text" name="courseDescription" class="form-control" id="courseDescription" placeholder="Enter Course Description">
+			  
+			
+			     <label for="email">Total slots:</label>
+			     <input name ="totalSlots" class="form-control" id="totalSlots" placeholder="Enter Total Slots">
+			     
+			     <label for="email">Location:</label>
+			     <input  name ="location" class="form-control" id="location" placeholder="Enter Location">
+			     
+			     <label for="email">Start time:</label>
+			     <input  name ="startTime" class="form-control" id="startTime" placeholder="Enter Start Time">
+			     <input  type="hidden" name ="availableSlots" class="form-control" id="availableSlots" placeholder="Enter email" value="60" />
+			
+			     <br>
+			
+			   <button id = "course_add"  class="btn btn-success">Add Course</button>
+			 </div>
+
+			 </form>
+	
+		  	</div>
+		  	<br/><br/><br/>
+			<div data-success class="container table-responsive">
+			  	<h1>Course added successfully!.</h1>
+			</div>
+		</div>
+	  </div>
+		
+    </div>
+	
+    
+      <hr>
+
+      <footer>
+        <p>&copy; 2015 Company, Inc.</p>
+      </footer>
+    <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/>
+	
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Login</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+ 
+
+ 
+$(document).ready(function(){
+	
+	<!--logout -->
+	if(localStorage.getItem("sessionKey") == null)
+		window.location.replace('/FES/site/static/login');
+	
+	 $.fn.serializeObject = function()
+	 {
+	     var o = {};
+	     var a = this.serializeArray();
+	     $.each(a, function() {
+	         if (o[this.name] !== undefined) {
+	             if (!o[this.name].push) {
+	                 o[this.name] = [o[this.name]];
+	             }
+	             o[this.name].push(this.value || '');
+	         } else {
+	             o[this.name] = this.value || '';
+	         }
+	     });
+	     return o;
+	 };
+	 
+	 
+	  $.ajax({ // ajax call starts
+	      url: '/FES/api/course/getRegCourses?sessionKey='+localStorage.getItem("sessionKey"), 
+	      data: JSON.stringify($('form[id=courseSearch]').serializeObject()), 
+	      dataType: 'json',
+	      contentType:'application/json',
+	      type:'POST'
+	    })
+	    .done(function(data) { // Variable data contains the data we get from serverside
+	    	var dataSet = [];
+	    	for(var i in data){
+	    		var row = [];
+	    		console.log(data[i].id);
+	    		row.push("<a href=viewCourse?id="+data[i].id+"&myCourse=true&sessionKey="+localStorage.getItem('sessionKey')+"> "+data[i].courseName+"</a>");
+	    		row.push(data[i].courseId);
+	    		row.push(data[i].professorName);
+	    		dataSet.push(row);
+	    	}
+	    	
+	    	$('#courses').DataTable( {
+	            data: dataSet,
+	            columns: [
+	                { title: "Course Name" },
+	                { title: "Course Id" },
+	                { title: "Professor" }
+	            ]
+	        } );
+	    });
+	
+	if(localStorage.getItem("role") == 'Student'){
+		$('[data-admin]').hide();
+		$('[data-student]').show();
+	}
+	else if(localStorage.getItem("role") == 'Admin'){
+		$('[data-student]').hide();
+		$('[data-admin]').show();
+	}
+  
+  $('#course_search').on('click', function() { 
+	    var button = $(this).val();
+	    $.ajax({ // ajax call starts
+	      url: '/FES/api/course/search?sessionKey='+localStorage.getItem("sessionKey"), 
+	      data: JSON.stringify($('form[id=courseSearch]').serializeObject()), 
+	      dataType: 'json',
+	      contentType:'application/json',
+	      type:'POST'
+	    })
+	    .done(function(data) { // Variable data contains the data we get from serverside
+	    	var dataSet = [];
+	    	for(var i in data){
+	    		var row = [];
+	    		console.log(data[i].id);
+	    		row.push("<a href=viewCourse?id="+data[i].id+"&sessionKey="+localStorage.getItem('sessionKey')+"> "+data[i].courseName+"</a>");
+	    		row.push(data[i].courseId);
+	    		row.push(data[i].professorName);
+	    		dataSet.push(row);
+	    	}
+	    	
+	    	$('#courses').DataTable( {
+	            data: dataSet,
+	            columns: [
+	                { title: "Course Name" },
+	                { title: "Course Id" },
+	                { title: "Professor" }
+	            ]
+	        } );
+	    });
+	    return false; // keeps the page from not refreshing 
+	  });
+  	
+  $('#logOut').on('click', function() { 
+	  var result = confirm("Are you sure you want to logout?");
+	  if(!result){
+	    // Stop the link from working.
+	    e.preventDefault();
+	  }
+	    $.ajax({ // ajax call starts
+	      url: '/FES/api/login/logoutUser?sessionKey='+localStorage.getItem("sessionKey"), 
+	      dataType: 'json',
+	      contentType:'application/json',
+	      type:'POST'
+	    })
+	    .done(function(data) { // Variable data contains the data we get from serverside
+	    	if(data.status == 'SUCCESS'){
+	    		alert('User Logged out successfully');
+	    		window.location.replace('/FES/site/static/login');
+	    		localStorage.removeItem("sessionKey");
+	    	}else if(data.status == 'FAILURE'){
+	    		alert(data.errorMsg);
+	    	}
+	    });
+	    return false; // keeps the page from not refreshing 
+	  });
+
+  
+});
+</script>
+</head>
+<body>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header" style="width:100%;">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home">OCRS</a>
+           <button id="logOut" class="btn btn-primary pull-right"  >logOut</button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+	<br/>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    
+    
+    <div class="jumbotron">
+      <div class="container-fluid">
+	  	<br/><br/>
+	  	<div class="list-group col-xs-3">
+	  		<br/>
+	  	  
+		  <a href="home" data-admin="true" data-student="true" class="list-group-item ">Search Course</a>
+		  <a href="#" data-student="true" class="list-group-item active">My Courses</a>
+		  <a href="addCourse" data-admin="true"  class="list-group-item">Add Course</a>
+		</div> 
+	  	<div class="col-xs-8">
+	  		<h2> My Courses</h2>
+	  	
+		  	<br/><br/><br/>
+			<div class="container table-responsive">
+			  
+			  <table id="courses" class="display" width="100%"></table>
+			</div>
+		</div>
+	  </div>
+		
+    </div>
+	
+    
+      <hr>
+
+      <footer>
+        <p>&copy; 2015 Company, Inc.</p>
+      </footer>
+    <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+<!--     <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/>
+	
+
+</body>
+</html>

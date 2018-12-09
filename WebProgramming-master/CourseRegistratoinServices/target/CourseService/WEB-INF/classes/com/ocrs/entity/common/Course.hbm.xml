@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ocrs.login.model.Course" table="COURSE" catalog="ocrs">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native"/>
+        </id>
+        <property name="courseId" type="string">
+            <column name="course_id"/>
+        </property>
+        <property name="professorName" type="string">
+            <column name="professor_name"/>
+        </property>
+        <property name="courseName" type="string">
+            <column name="course_name"/>
+        </property>
+        <property name="courseLevel" type="java.lang.Integer">
+            <column name="course_level"/>
+        </property>
+         <property name="courseDesc" type="string">
+            <column name="course_desc" default="Not yet defined"/>
+        </property>
+        <property name="totalSlots" type="java.lang.Integer">
+            <column name="course_total_slots"/>
+        </property>
+        <property name="availableSlots" type="java.lang.Integer">
+            <column name="course_avlbl_slots"/>
+        </property>
+        <property name="location" type="string">
+            <column name="location" default="ECS"/>
+        </property>
+         <property name="startTime" type="string">
+            <column name="start_time"/>
+        </property>
+    </class>
+    
+	
+</hibernate-mapping>

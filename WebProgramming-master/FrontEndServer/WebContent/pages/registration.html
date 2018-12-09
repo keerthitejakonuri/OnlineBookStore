@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Registration Form</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 
+ 
+ <script type="text/javascript">
+ 
+ $.fn.serializeObject = function()
+ {
+     var o = {};
+     var a = this.serializeArray();
+     $.each(a, function() {
+         if (o[this.name] !== undefined) {
+             if (!o[this.name].push) {
+                 o[this.name] = [o[this.name]];
+             }
+             o[this.name].push(this.value || '');
+         } else {
+             o[this.name] = this.value || '';
+         }
+     });
+     return o;
+ };
+ 
+$(document).ready(function(){
+	
+	
+	
+  $('#Register_button').on('click', function() { 
+    var button = $(this).val();
+    $.ajax({ // ajax call starts
+      url: '/FrontEndServer/api/register/registerUser', 
+      data: JSON.stringify($('form').serializeObject()), 
+      dataType: 'json',
+      contentType:'application/json',
+      type:'POST'
+    })
+    .done(function(data) { // Variable data contains the data we get from serverside
+      alert(data);
+    });
+    return false; // keeps the page from not refreshing 
+  });
+});
+</script>
+</head>
+<body>
+
+<div class="container">
+ <h2>Registartion Form</h2>
+ <form role="form" method="POST" action="/api/register/registerUser"> 
+
+   <div class = "form-group col-md-3">
+     <label for="user">UserName:</label>
+     <input type="text" name= "userName" class="form-control" id="user" placeholder="Enter User Name"/>
+  
+     <label for="first_name">FirstName:</label>
+     <input type="text" name= "firstName" class="form-control" id="first_name" placeholder="Enter First Name">
+ 
+
+     <label for="last_name">LastName:</label>
+     <input type="text" name = "lastName" class="form-control" id="last_name" placeholder="Enter Last Name">
+
+  
+     <label for="pwd">Password:</label>
+     <input type="password" name="password" class="form-control" id="pwd1" placeholder="Enter password">
+   
+   
+     <label for="re_pwd">Re-eneter Password:</label>
+     <input type="password" name="reenterPassword" class="form-control" id="re_pwd" placeholder="ReEnter password">
+  
+
+     <label for="email">Email_id:</label>
+     <input type="email" name ="email" class="form-control" id="email" placeholder="Enter email">
+
+     <br>
+
+   <button id = "Register_button" type="submit" class="btn btn-success">Register</button>
+ </div>
+ </form>
+</div>
+
+</body>
+</html>
